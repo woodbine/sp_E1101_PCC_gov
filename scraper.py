@@ -86,7 +86,7 @@ def convert_mth_strings ( mth_string ):
 #### VARIABLES 1.0
 
 entity_id = "E1101_PCC_gov"
-url = 'http://www.plymouth.gov.uk/spendover500'
+url = 'http://www.plymouth.gov.uk/paymentsover%C2%A3500'
 errors = 0
 data = []
 
@@ -100,8 +100,7 @@ soup = BeautifulSoup(html, 'lxml')
 #### SCRAPE DATA
 
 
-block = soup.find('div', attrs = {'id':'accordion-container'})
-links = block.findAll('a', href=True)
+links = soup.findAll('a', href=True)
 for link in links:
     url = link['href']
     if 'csv' in url:
@@ -110,6 +109,8 @@ for link in links:
         csvfile = url.split('500')[-1].split('.csv')[0]
         csvMth = csvfile[:3]
         csvYr = csvfile[-4:]
+        if '14_0' in csvYr:
+            csvYr = '2014'
         csvMth = convert_mth_strings(csvMth.upper())
         data.append([csvYr, csvMth, url])
 
@@ -134,4 +135,3 @@ if errors > 0:
 
 
 #### EOF
-
