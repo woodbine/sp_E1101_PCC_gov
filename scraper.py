@@ -86,7 +86,7 @@ def convert_mth_strings ( mth_string ):
 #### VARIABLES 1.0
 
 entity_id = "E1101_PCC_gov"
-url = 'http://www.plymouth.gov.uk/paymentsover%C2%A3500'
+url = 'https://www.plymouth.gov.uk/home/council/dataandinformation/publicationscheme'
 errors = 0
 data = []
 
