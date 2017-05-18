@@ -104,13 +104,15 @@ links = soup.findAll('a', href=True)
 for link in links:
     url = link['href']
     if 'csv' in url:
-        if 'http://' not in url:
-            url = 'http://www.plymouth.gov.uk/' +url
-        csvfile = url.split('500')[-1].split('.csv')[0]
-        csvMth = csvfile[:3]
-        csvYr = csvfile[-4:]
+        if 'http' not in url:
+            url = 'https://www.plymouth.gov.uk' +url
+        link_text = link.text.strip()
+        csvMth = link_text[:3]
+        csvYr = url.split('.csv')[0][-4:]
         if '14_0' in csvYr:
             csvYr = '2014'
+        if '16_0' in csvYr:
+            csvYr = '2016'
         csvMth = convert_mth_strings(csvMth.upper())
         data.append([csvYr, csvMth, url])
 
